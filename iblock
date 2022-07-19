@@ -1,0 +1,22 @@
+// Шаблон компонента 
+
+$IBLOCK_ID = 36;
+$PROPERTY_CODE = "USERS_LOOKED";
+$ELEMENT_ID_0 = $arResult["ITEMS"][0]['ID'];
+        
+
+showProperty($IBLOCK_ID, $ELEMENT_ID_0); 
+showProperty_list($IBLOCK_ID, $ELEMENT_ID_0); 
+
+ function showProperty_list($IBLOCK_ID, $ELEMENT_ID) {
+    echo "ELEMENT_ID: $ELEMENT_ID" . PHP_EOL;
+    $db_props = CIBlockElement::GetProperty($IBLOCK_ID, $ELEMENT_ID, array("sort" => "asc"), Array("CODE"=>"USERS_LOOKED"));
+    if($ar_props = $db_props->Fetch())
+        var_dump($ar_props);
+}
+
+function showProperty($IBLOCK_ID, $ELEMENT_ID) {
+  echo "ELEMENT_ID: $ELEMENT_ID" . PHP_EOL;
+  $db_props = CIBlockElement::GetProperty($IBLOCK_ID, $ELEMENT_ID, array("sort" => "asc"), Array());
+  if($ar_props = $db_props->Fetch()) var_dump($ar_props);
+}
