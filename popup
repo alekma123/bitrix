@@ -1,0 +1,25 @@
+<div class="bx-core-window bx-core-adm-dialog" id="bx-admin-prefix" style="z-index: 1050 !important; position: absolute; display: block; top: 131px; left: 352px;">
+  <div class="bx-core-adm-dialog-head" style="cursor: move;"><span class="bx-core-adm-dialog-head-inner">Битрикс24 - Единая авторизация</span>
+  <div class="bx-core-adm-dialog-head-icons"><span class="bx-core-adm-icon-close" title="Закрыть"></span>
+  </div>
+</div>
+<div class="bx-core-adm-dialog-content-wrap adm-workarea">
+  <div class="bx-core-adm-dialog-content" style="height: 220px; width: 550px;">
+    <div class="bx-core-adm-dialog-head-block" style="display: none;">&nbsp;</div>
+  <div class="bx-core-adm-dialog-content-wrap-inner">
+    <div>
+      <div class="ss-network-connect-text"><b>Подключите свой Битрикс24</b>, используйте один логин и пароль для авторизации на любом вашем сайте.<br><br>Больше не нужно помнить разные пароли и логины,<br>Битрикс24 - ваш единый вход.
+      </div>
+    <div class="ss-network-dontshow">
+      <input type="checkbox" class="ss-network-dontshow-checkbox" id="ss_dontshow_0.991478000087959">
+      <label for="ss_dontshow_0.991478000087959"> Больше не показывать это сообщение</label>
+    </div>
+  </div>
+</div>
+</div>
+<div class="bx-core-adm-dialog-buttons"><input type="button" name="save" value="Подключить" id="save" class="adm-btn-save"><input type="button" name="close" value="Закрыть" id="close">
+</div>
+</div>
+</div>
+
+<!-- https://b24mm.ru/bitrix/panel/main/popup.css?164738913923085 -->
