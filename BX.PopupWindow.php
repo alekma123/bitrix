@@ -26,23 +26,23 @@ var Dialog = new BX.CDialog({
           null, 
          {
             content: BX( 'ajax-add-answer'),
-			 //closeIcon: {right: "20px", top: "10px" },
+	    closeIcon: {right: "20px", top: "10px" },
             titleBar: {content: BX.create("span", {html: '<b>Это заголовок окна</b>', 'props': {'className': 'access-title-bar'}})}, 
             zIndex: 0,
             offsetLeft: 0,
             offsetTop: 0,
-			 //draggable: {restrict: false},
+			draggable: {restrict: false},
 			overlay: {
 			 backgroundColor: 'black', opacity: '80'
 		  	},
-			 buttons: [/*
+			 buttons: [
                new BX.PopupWindowButton({
                   text: "Сохранить" ,
                   className: "popup-window-button-accept" ,
                   events: {click: function(){
                      this.popupWindow.close();
                   }}
-			   }), */
+			   }), 
                new BX.PopupWindowButton({
                   text: "Я прочитал" ,
                   className: "webform-button-link-cancel" ,
@@ -53,7 +53,7 @@ var Dialog = new BX.CDialog({
             ]
          });
 	addAnswer.show();
-
+/*
 	window.BXDEBUG = true;
 	BX.ready(function(){
 	   var oPopup = new BX.PopupWindow('call_feedback', window.body, {
@@ -67,7 +67,7 @@ var Dialog = new BX.CDialog({
 			 backgroundColor: 'red', opacity: '80'
 		  }
 	   }); 
-/*
+
    oPopup.setContent(BX('hideBlock'));
    BX.bindDelegate(
       document.body, 'click', {className: 'css_popup' },
@@ -77,8 +77,9 @@ var Dialog = new BX.CDialog({
             oPopup.show();
             return BX.PreventDefault(e);
          }, oPopup)
-   );*/
-	//oPopup.show();
-});
+   );
+    oPopup.show();
+}); 
+	*/
 
 </script>
