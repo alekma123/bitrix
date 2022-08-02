@@ -1,0 +1,179 @@
+<!-- <script type="text/javascript" src="//api.bitrix24.com/api/v1/"></script> -->
+<style>
+    .btn {
+        cursor: pointer;
+    }
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script type="text/javascript">
+/*
+	BX24.init(function(){
+		console.log('Инициализация завершена!', BX24.isAdmin());
+    }); */ 
+	/*
+	BX24.callMethod('user.get', {sort:'ID',order:'ASC'}, function(result){
+		if(result.error())
+		{
+			alert('Ошибка запроса: ' + result.error());
+		}
+		else
+		{
+			console.log(result.data());
+			if(result.more())
+				result.next();
+		}
+}); */
+var index = 0;
+var indexStop = 3;
+var page = 0;
+
+jQuery(document).ready(function($) {
+    page = 0;
+    $("#complete_script strong").text('');
+    $("#run_script").click(function() {
+        update();
+    });
+    $("#link_by_phone_work").click(function() {
+        link_by_phone_work();
+    });
+    $("#status_operation #pager_current").text(page);
+});
+
+var update = function() {
+        $("#complete_script strong").text('loading...');
+        page++;
+        $("#status_operation #pager_current").text(page);
+
+        $.ajax({
+            url: './index.php',         
+            // method: 'get',               
+            method: 'post',  
+            data: { "page" : page },             
+            dataType: 'json',          
+            success: function(data) {   
+                $('#error').html('');
+               
+                index++;
+                $("#output").prepend(data['text']).fadeIn('slow');
+                // $("#status_operation").html(data['status']);
+                $("#status_operation #totalDeals").html(data['status']['totalDeals']);
+                $("#status_operation #updateDeals").html(data['status']['updateDeals']);
+                
+                if (index == indexStop) { 
+                    // вывести, когда отработает полностью скритп           
+                    $("#complete_script strong").text('...script was executed');
+                    index = 0;
+                    return; 
+                }
+               var refInterval = window.setTimeout('update()', 3000); // 3 seconds
+            },
+            error: function(err) {
+                console.log("Error: ", err);
+                let textError =  err.responseText;
+                $('#error').html(textError);
+            }
+        }); 
+        
+    };
+
+//--------------  133 СДЕЛКИ С LEAD_ID = [L] ....-----------------------------
+var link_by_phone_work = function() {
+        $("#complete_script strong").text('loading...');
+        page++;
+        $("#status_operation #pager_current").text(page);
+
+        $.ajax({
+            url: './link_by_phone_work.php',         
+            // method: 'get',               
+            method: 'post',  
+            data: { "page" : page },             
+            dataType: 'json',          
+            success: function(data) {   
+                $('#error').html('');
+               
+                index++;
+                $("#output").prepend(data['text']).fadeIn('slow');
+                // $("#status_operation").html(data['status']);
+                $("#status_operation #totalDeals").html(data['status']['totalDeals']);
+                $("#status_operation #updateDeals").html(data['status']['updateDeals']);
+                
+                if (index == indexStop) { 
+                    // вывести, когда отработает полностью скритп           
+                    $("#complete_script strong").text('...script was executed');
+                    index = 0;
+                    return; 
+                }
+               var refInterval = window.setTimeout('update()', 3000); // 3 seconds
+            },
+            error: function(err) {
+                console.log("Error: ", err);
+                let textError =  err.responseText;
+                $('#error').html(textError);
+            }
+        }); 
+        
+    };    
+
+
+    // ----- СВЯЗАТЬ СДЕЛКИ С КОНТАКТАМИ ПО ДОПОЛНИТЕЛЬНЫМ НОМЕРАМ ТЕЛ. ПО ПОЛЮ PHONE_WORK 
+    // (ДЛЯ 637 СДЕЛОК НЕ ПРИВЯЗАННЫХ К КОНТАКТАМ)
+    var link_by_extra_phone = function() {
+        $("#complete_script strong").text('loading...');
+        page++;
+        $("#status_operation #pager_current").text(page);
+
+        $.ajax({
+            url: './link_by_extra_phone.php',         
+            // method: 'get',               
+            method: 'post',  
+            data: { "page" : page },             
+            dataType: 'json',          
+            success: function(data) {   
+                $('#error').html('');
+               
+                index++;
+                $("#output").prepend(data['text']).fadeIn('slow');
+                // $("#status_operation").html(data['status']);
+                $("#status_operation #totalDeals").html(data['status']['totalDeals']);
+                $("#status_operation #updateDeals").html(data['status']['updateDeals']);
+                
+                if (index == indexStop) { 
+                    // вывести, когда отработает полностью скритп           
+                    $("#complete_script strong").text('...script was executed');
+                    return; 
+                }
+               var refInterval = window.setTimeout('update()', 3000); // 3 seconds
+            },
+            error: function(err) {
+                console.log("Error: ", err);
+                let textError =  err.responseText;
+                $('#error').html(textError);
+            }
+        }); 
+        
+    };
+
+</script>
+
+<div>
+    <button class="btn" id="run_script"> RUN SCRIPT...</button>
+    <button class="btn" id="link_by_phone_work"> OUTPUT LOG (133 СДЕЛКИ С LEAD_ID = [L] ....) </button>
+    <!-- <button class="btn" id="link_by_extra_phone" >Связать контакты по дополнительным номерам телефона</button> -->
+</div>
+
+<h5 id="error"></h5>
+<div id="status_operation">
+    Всего сделок для обработки: <span id="totalDeals"></span>
+    <br> 
+    Кол-во сделок, привязанных к контактам: <span id="updateDeals"></span>
+    <br>
+    Итерация: <span id="pager_current"></span>  <span> по 200 сделок</span>
+</div>
+<div id="complete_script">
+    <strong></strong>
+</div>
+<div id="test">
+</div>
+<div id="output"></div>
+
+
