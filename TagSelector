@@ -1,0 +1,127 @@
+
+<script>
+BX.ready(
+		function() {
+			let items = <?= CUtil::PhpToJSObject($arResult["POST_PROPERTIES"]["DATA"]["UF_CATEGORY_CODE"]["FIELDS"]) ?>;
+			const tagSelector = new BX.UI.EntitySelector.TagSelector({
+				textBoxAutoHide: true,
+				textBoxWidth: 350,
+				maxHeight: 99,
+				placeholder: "Категории",
+				showCreateButton: false,
+				items: <?= CUtil::PhpToJSObject($arResult["POST_PROPERTIES"]["DATA"]["UF_CATEGORY_CODE"]["FIELDS"]) ?>,
+				dialogOptions: {
+					//context: 'MY_MODULE_CONTEXT',
+					// entities: items
+                    dropdownMode: true,
+                    tabs: [
+                        { id: 'iblock-sections', title: 'Категории', itemOrder: { 'title': 'asc' }  },
+                        // { id: 'countries', title: 'Страны', itemOrder: { 'title': 'asc' } },
+                    ],
+                    items: [
+                        { id: 17, entityId: 'iblock-element', tabs: 'iblock-sections', title: 'Повышение качества работ/услуг/взаимодеяствия между подразделениями' },
+                        { id: 16, entityId: 'iblock-element', tabs: 'iblock-sections', title: 'Увеличение производительности, снижение трудоемкости при выполнении операций' },
+                        { id: 15, entityId: 'iblock-element', tabs: 'iblock-sections', title: 'Снижение потерь и сокращение затрат, повышение энергоэффективности' },
+                        /*{ id: 2, entityId: 'city', tabs: 'cities', title: 'Москва' },
+                        { id: 3, entityId: 'city', tabs: 'cities', title: 'Киев' },
+                        { id: 4, entityId: 'city', tabs: 'cities', title: 'Санкт-Петербург' },
+                        { id: 5, entityId: 'city', tabs: 'cities', title: 'Минск' },
+                        { id: 6, entityId: 'city', tabs: 'cities', title: 'Гданьск' },
+                        { id: 7, entityId: 'city', tabs: 'cities', title: 'Варшава' },
+                        { id: 8, entityId: 'city', tabs: 'cities', title: 'Берлин' },*/
+                        /*{ id: 1, entityId: 'country', tabs: 'countries', title: 'Российская Федерация' },
+                        { id: 2, entityId: 'country', tabs: 'countries', title: 'Соединенные Штаты Америки' },
+                        { id: 3, entityId: 'country', tabs: 'countries', title: 'Украина' },
+                        { id: 4, entityId: 'country', tabs: 'countries', title: 'Беларусь' },
+                        { id: 5, entityId: 'country', tabs: 'countries', title: 'Польша' },
+                        { id: 6, entityId: 'country', tabs: 'countries', title: 'Казахстан' }*/,
+                    ],
+				},
+
+				events: {
+					/*
+					onTagAdd: function(event){
+
+					},
+
+					onBeforeTagAdd: function(event) {
+						const selector = event.getTarget();
+						const { tag } = event.getData();
+						if (tag.getTitle() === 'xxx')
+						{
+							event.preventDefault();
+						}
+					},
+					onBeforeTagRemove: function(event) {
+						const selector = event.getTarget();
+						const { tag } = event.getData();
+						if (tag.getTitle() === 'aaa')
+						{
+							event.preventDefault();
+						}
+					},*/
+					onEnter: (event) => {
+						const selector = event.getTarget();
+						const value = selector.getTextBoxValue();
+						value.split(' ').forEach(function(title) {
+							selector.addTag({
+								id: Math.floor(Math.random() * 1999),
+								title: title,
+								entityId: 'iblock',
+							});
+						});
+					}
+				},
+			});
+			tagSelector.renderTo(document.getElementById('UF_CATEGORY_CODE'));
+
+		});
+
+
+</script>
+
+
+
+
+
+
+
+
+<div id="button">Category</div>
+
+<script>
+    const button = document.getElementById('button');
+    const dialog = new BX.UI.EntitySelector.Dialog({
+        targetNode: button,
+        width: 400,
+        height: 300,
+        dropdownMode: true,
+        showAvatars: false,
+        compactView: true,
+        tabs: [
+            { id: 'cities', title: 'Города', itemOrder: { 'title': 'asc' }  },
+            { id: 'countries', title: 'Страны', itemOrder: { 'title': 'asc' } },
+            { id: 'iblock-sections', title: 'Категории', itemOrder: { 'title': 'asc' }  },
+        ],
+        items: [
+            { id: 1, entityId: 'city', tabs: 'cities', title: 'Калининград' },
+            { id: 2, entityId: 'city', tabs: 'cities', title: 'Москва' },
+            { id: 3, entityId: 'city', tabs: 'cities', title: 'Киев' },
+            { id: 4, entityId: 'city', tabs: 'cities', title: 'Санкт-Петербург' },
+            { id: 5, entityId: 'city', tabs: 'cities', title: 'Минск' },
+            { id: 6, entityId: 'city', tabs: 'cities', title: 'Гданьск' },
+            { id: 7, entityId: 'city', tabs: 'cities', title: 'Варшава' },
+            { id: 8, entityId: 'city', tabs: 'cities', title: 'Берлин' },
+            { id: 1, entityId: 'country', tabs: 'countries', title: 'Российская Федерация' },
+            { id: 2, entityId: 'country', tabs: 'countries', title: 'Соединенные Штаты Америки' },
+            { id: 3, entityId: 'country', tabs: 'countries', title: 'Украина' },
+            { id: 4, entityId: 'country', tabs: 'countries', title: 'Беларусь' },
+            { id: 5, entityId: 'country', tabs: 'countries', title: 'Польша' },
+            { id: 6, entityId: 'country', tabs: 'countries', title: 'Казахстан' },
+            { id: 17, entityId: 'iblock-element', tabs: 'iblock-sections', title: 'Повышение качества работ/услуг/взаимодеяствия между подразделениями' },
+            { id: 16, entityId: 'iblock-element', tabs: 'iblock-sections', title: 'Увеличение производительности, снижение трудоемкости при выполнении операций' },
+            { id: 15, entityId: 'iblock-element', tabs: 'iblock-sections', title: 'Снижение потерь и сокращение затрат, повышение энергоэффективности' }
+        ],
+    });
+    dialog.show();
+</script>
